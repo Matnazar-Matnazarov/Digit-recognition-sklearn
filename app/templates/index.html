@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}{{ app_name }} - Draw & Predict{% endblock %}
+
+{% block content %}
+<div class="paint-container">
+    <div class="instructions">
+        <h2>How to use</h2>
+        <ol>
+            <li>Draw a digit (0-9) in the canvas below</li>
+            <li>Use your mouse or touch to draw</li>
+            <li>Click "Predict" to see what the AI thinks</li>
+            <li>Click "Clear" to start over</li>
+        </ol>
+    </div>
+
+    <div class="canvas-section">
+        <div class="canvas-container">
+            <canvas 
+                id="paint" 
+                width="280" 
+                height="280"
+                class="paint-canvas"
+                title="Draw a digit here (0-9)"
+            ></canvas>
+            
+            <div class="canvas-overlay" id="canvasOverlay">
+                <div class="overlay-text">Draw a digit here</div>
+            </div>
+        </div>
+
+        <div class="canvas-controls">
+            <button 
+                id="clearBtn" 
+                type="button" 
+                class="btn btn-secondary"
+                title="Clear the canvas"
+            >
+                <span class="btn-icon">🗑️</span>
+                Clear
+            </button>
+
+            <form 
+                id="predictForm" 
+                hx-post="/predict" 
+                hx-target="#result" 
+                hx-swap="innerHTML"
+                hx-indicator="#loadingIndicator"
+                class="predict-form"
+            >
+                <input type="hidden" name="image" id="imageInput" />
+                <button 
+                    id="predictBtn" 
+                    type="submit" 
+                    class="btn btn-primary"
+                    title="Predict the drawn digit"
+                >
+                    <span class="btn-icon">🔮</span>
+                    Predict
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <span>Analyzing your drawing...</span>
+    </div>
+
+    <!-- Results section -->
+    <div id="result" class="result-section">
+        <!-- Results will be inserted here by HTMX -->
+    </div>
+
+    <!-- Tips section -->
+    <div class="tips-section">
+        <h3>💡 Tips for better recognition</h3>
+        <ul>
+            <li>Draw digits in the center of the canvas</li>
+            <li>Make them large enough to fill most of the space</li>
+            <li>Use clear, bold strokes</li>
+            <li>Avoid very thin or broken lines</li>
+        </ul>
+    </div>
+</div>
+{% endblock %} 

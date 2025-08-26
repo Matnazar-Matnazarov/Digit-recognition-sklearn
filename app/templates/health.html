@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Health Check - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="health-container">
+    <div class="health-card">
+        <div class="health-header">
+            <h2>🏥 Service Health Check</h2>
+        </div>
+        
+        <div class="health-content">
+            <div class="status-indicator {{ 'healthy' if status == 'healthy' else 'unhealthy' }}">
+                <span class="status-icon">
+                    {% if status == 'healthy' %}✅{% else %}❌{% endif %}
+                </span>
+                <span class="status-text">{{ status|title }}</span>
+            </div>
+            
+            <div class="health-details">
+                <p><strong>Status:</strong> {{ status|title }}</p>
+                <p><strong>Message:</strong> {{ message }}</p>
+                <p><strong>App:</strong> {{ app_name }}</p>
+            </div>
+        </div>
+        
+        <div class="health-actions">
+            <a href="/" class="btn btn-primary">Back to App</a>
+            <a href="/docs" class="btn btn-outline" target="_blank">API Documentation</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

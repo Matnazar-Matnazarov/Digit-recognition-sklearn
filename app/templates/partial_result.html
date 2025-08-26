@@ -1,0 +1,40 @@
+<div class="prediction-result">
+    <div class="result-header">
+        <h3>🎯 Prediction Result</h3>
+    </div>
+    
+    <div class="result-content">
+        <div class="predicted-digit">
+            <span class="digit-display">{{ result }}</span>
+        </div>
+        
+        <div class="confidence-info">
+            <div class="confidence-bar">
+                <div class="confidence-fill" style="width: {{ confidence_percentage }}"></div>
+            </div>
+            <p class="confidence-text">
+                Confidence: <strong>{{ confidence_percentage }}</strong>
+            </p>
+        </div>
+        
+        <div class="result-message">
+            {% if confidence >= 0.8 %}
+                <p class="high-confidence">✅ High confidence prediction!</p>
+            {% elif confidence >= 0.6 %}
+                <p class="medium-confidence">⚠️ Medium confidence - try drawing more clearly</p>
+            {% else %}
+                <p class="low-confidence">❓ Low confidence - please try again with a clearer digit</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="result-actions">
+        <button 
+            onclick="clearCanvas()" 
+            class="btn btn-outline"
+            title="Draw another digit"
+        >
+            Draw Another
+        </button>
+    </div>
+</div> 

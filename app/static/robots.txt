@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow API endpoints from being crawled
+Disallow: /api/
+Disallow: /docs/
+Disallow: /redoc/
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml 
